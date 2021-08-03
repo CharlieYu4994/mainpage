@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>CharlieYu's Home</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="./propic.png">
+    <link rel="bookmark" href="./propic.png">
+
+    <style type="text/css">
+        a {
+            text-decoration: none;
+            color: #555;
+            font-size: 200%;
+        }
+
+        .box {
+            height: 80%;
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 402px;
+        }
+
+        .side {
+            backface-visibility: hidden;
+            background-color: #fefefa;
+            border-radius: 10px;
+            border: 5px solid #f16d7a;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            transition: all 1s;
+            width: 100%;
+
+            display: grid;
+            grid-template-columns: repeat(3, 33.33%);
+            grid-template-rows: repeat(16, 1fr);
+        }
+
+        .propic {
+            background-color: #FFF;
+            border-radius: 50%;
+            border: 1px solid #ededed;
+            display: block;
+            margin-top: 5px;
+            max-width: 100%;
+            padding: 2px;
+        }
+
+        .text {
+            text-align: center;
+            font-size: 20px;
+            font-family: Georgia, Palatino;
+            color: #666;
+            line-height: 125%;
+        }
+
+        .bg-img {
+            left: 0px;
+            top: 0px;
+            overflow: hidden;
+            margin: 0px;
+            padding: 0px;
+            z-index: -999999;
+            position: fixed;
+            opacity: 0.85;
+            width: 100%;
+            height: 100%;
+        }
+
+        .bg-img img {
+            filter: blur(2px);
+        }
+
+        .bg-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .link-box {
+            font-family: sans-serif;
+            font-size: 14px;
+            color: #555;
+            margin: 0;
+            border: 0;
+            vertical-align: baseline;
+            margin-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        .links {
+            position: relative;
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.css" />
+</head>
+
+<body style="background-color: #eff5f9;">
+    <input type="checkbox" id="toggler" style="display: none;" />
+    <div class="bg-img">
+        <img src="https://api.lassi-cat.cn:60443/randpic/" alt="" />
+    </div>
+
+    <label for="toggler">
+        <div class="box">
+            <div class="side" id="front">
+                <div style="grid-column: 2 / 3;grid-row: 2 / 6;">
+                    <img class="propic" src="propic.png" />
+                    <p style="margin: 0;text-align: center;color: #222;font-weight: 600;font-size: 1em;">
+                        CharlieYu4994
+                    </p>
+                </div>
+                <div class="text" style="grid-column: 1 / -1;grid-row: 7 / 8;">
+                    是一个正太
+                </div>
+
+                <div class="text" id="description" style="grid-column: 1 / -1;grid-row: 10 / 12;">
+                </div>
+
+                <div class="link-box" style="grid-column: 1 / -1;grid-row: -2 / -1;">
+                    <div class="links">
+                        <a href="https://github.com/CharlieYu4994">
+                            <i class="fa fa-github-alt" title="GitHub"></i>
+                        </a>
+                        <a href="https://space.bilibili.com/26656312">
+                            <i class="fa fa-play-circle" title="Bilibili"></i>
+                        </a>
+                        <a href="https://blog.charlie.moe">
+                            <i class="fa  fa-user-circle-o" title="Bilibili"></i>
+                        </a>
+                        <a href="https://t.me/CharlieYu4994">
+                            <i class="fa fa-telegram" title="Telegram"></i>
+                        </a>
+                        <a href="mailto:charlieyu4994@lassi-cat.cn">
+                            <i class="fa fa-envelope-o" title="邮箱"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="side" id="back" style="transform: rotateY(-180deg);">
+            </div>
+        </div>
+    </label>
+</body>
+
+<script type="text/javascript">
+
+    window.onload = function () {
+        var front = document.getElementById("front");
+        var back = document.getElementById("back");
+        var cb = document.getElementById("toggler");
+
+        cb.onclick = function () {
+            if (cb.checked) {
+                front.style.transform = "rotateY(180deg)";
+                back.style.transform = "rotateY(0deg)";
+            }
+            else {
+                back.style.transform = "rotateY(-180deg)";
+                front.style.transform = "rotateY(0deg)";
+            }
+        }
+        fetch('https://v1.hitokoto.cn?c=a').then(function (res) {
+            return res.json();
+        }).then(function (e) {
+            box = document.getElementById('description').innerHTML = (e.hitokoto + "<br/> -「<strong>" + e.from + "</strong>」")
+        })
+    }
+</script>
+
+</html>
