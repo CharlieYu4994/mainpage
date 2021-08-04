@@ -13,6 +13,7 @@ window.onload = function () {
             front.style.transform = "rotateY(0deg)";
         }
     }
+
     fetch('https://v1.hitokoto.cn?c=a').then(function (res) {
         return res.json();
     }).then(function (e) {
